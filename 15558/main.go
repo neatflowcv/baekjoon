@@ -20,17 +20,6 @@ type Input struct {
 	k     int
 	left  string
 	right string
-	// 안전한 칸: 유저가 이동할 수 있다.
-	// 위험한 칸
-	// 유저는 최초 왼쪽 1번칸에 있다.
-	// 유저 가능 행동
-	// 위로 +1 칸 이동
-	// 아래로 -1 칸 이동
-	// 반대편 줄의 +k 칸
-
-	// N 칸 이상이면 승리
-
-	// 1초 마다 가장 작은 숫자 칸이 사라진다.
 }
 
 func ReadInput(reader *bufio.Reader) *Input {
@@ -139,7 +128,6 @@ func Solution(input *Input) bool {
 	currentLocations = append(currentLocations, user)
 
 	for len(currentLocations) > 0 && lanes.Seconds() < input.n {
-		// next candidates
 		var nextCandidates []*Location
 		for _, currentLocation := range currentLocations {
 			nextCandidates = append(nextCandidates, currentLocation.Next(input.k)...)
