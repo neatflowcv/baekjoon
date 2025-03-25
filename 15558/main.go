@@ -69,6 +69,10 @@ func (l *Location) Next(k int) []*Location {
 	}
 }
 
+func (l *Location) String() string {
+	return fmt.Sprintf("(%d, %d)", l.line, l.pos)
+}
+
 type Lanes struct {
 	lanes []*Lane
 }
@@ -141,7 +145,12 @@ func Solution(input *Input) bool {
 			nextCandidates = append(nextCandidates, currentLocation.Next(input.k)...)
 		}
 		var availableCandidates []*Location
+		unique := make(map[string]struct{})
 		for _, candidate := range nextCandidates {
+			if _, ok := unique[candidate.String()]; ok {
+				continue
+			}
+			unique[candidate.String()] = struct{}{}
 			if lanes.IsAvailable(candidate.line, candidate.pos) {
 				if candidate.pos >= input.n-1 {
 					return true
