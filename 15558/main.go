@@ -143,7 +143,7 @@ func Solution(input *Input) bool {
 		var availableCandidates []*Location
 		for _, candidate := range nextCandidates {
 			if lanes.IsAvailable(candidate.line, candidate.pos) {
-				if candidate.pos >= input.n {
+				if candidate.pos >= input.n-1 {
 					return true
 				}
 				availableCandidates = append(availableCandidates, candidate)
