@@ -15,30 +15,21 @@ func Read[T any](reader *bufio.Reader) T {
 	return ret
 }
 
-func newReader() *bufio.Reader {
-	_, ok := os.LookupEnv("DEBUG")
-	if ok {
-		file, err := os.Open("input.txt")
-		if err != nil {
-			panic(err)
-		}
-		return bufio.NewReader(file)
-	}
-	reader := bufio.NewReader(os.Stdin)
-	return reader
-}
-
-type Input struct {
-}
+type Input struct{}
 
 func ReadInput(reader *bufio.Reader) *Input {
 	return &Input{}
 }
 
 func main() {
-	reader := newReader()
+	reader := bufio.NewReader(os.Stdin)
 	writer := bufio.NewWriter(os.Stdout)
 	defer writer.Flush()
 	input := ReadInput(reader)
-	_ = input
+	ret := Solution(input)
+	fmt.Fprintln(writer, ret)
+}
+
+func Solution(input *Input) any {
+	return nil
 }
