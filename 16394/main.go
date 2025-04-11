@@ -15,10 +15,15 @@ func Read[T any](reader *bufio.Reader) T {
 	return ret
 }
 
-type Input struct{}
+type Input struct {
+	n int
+}
 
 func ReadInput(reader *bufio.Reader) *Input {
-	return &Input{}
+	n := Read[int](reader)
+	return &Input{
+		n: n,
+	}
 }
 
 func main() {
@@ -30,6 +35,6 @@ func main() {
 	fmt.Fprintln(writer, ret)
 }
 
-func Solution(input *Input) any {
-	return nil
+func Solution(input *Input) int {
+	return input.n - 1946
 }
